@@ -65,6 +65,14 @@ async function run() {
       const myPackages = await cursor.toArray();
       res.json(myPackages);
     });
+
+    //DELETE API
+    app.delete("/packages/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await bookingCollection.deleteOne(query);
+      res.json(result);
+    });
   } finally {
     // await client.close();
   }
